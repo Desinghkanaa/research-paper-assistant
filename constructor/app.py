@@ -67,7 +67,7 @@ if submitted and st.session_state.result is None:
         status = st.status("Processing", expanded=True)
 
         status.update(label="Fetching repository...")
-        repo_data = fetch_repo(owner, repo, max_files=150)
+        repo_data = fetch_repo(owner, repo, max_files=120)
 
         status.update(label="Building vector database...")
         vector_db = build_vectorstore(repo_data)
