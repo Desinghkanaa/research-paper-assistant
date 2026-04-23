@@ -22,7 +22,6 @@ git commit -m "Initial commit: Research Paper AI Assistant with Constructor and 
 ```
 
 ## 4. Create a GitHub Repository
-
 1. Go to https://github.com/new
 2. Enter repository name: `research-paper-assistant`
 3. Add description: "AI-powered research assistant that generates IEEE papers from GitHub repos and analyzes research papers"

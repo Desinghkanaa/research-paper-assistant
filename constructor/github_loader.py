@@ -138,10 +138,20 @@ def fetch_repo(owner: str, repo: str, max_files: int = 10):
 
     files = []
     for item in tree.get("tree", []):
-        if len(files) >= max_files:
-            break
-        if item.get("type") == "blob" and item.get("size", 0) <= 200_000:
+        # if len(files) >= max_files:
+        #     break
+        # if item.get("type") == "blob" and item.get("size", 0) <= 200_000:
+        #     files.append(item["path"])
+       
+        if (
+        item.get("type") == "blob"
+        and item.get("size", 0) <= 200_000
+        and item["path"].endswith((".py", ".md", ".json", ".txt"))
+        and "test" not in item["path"].lower()
+        and "log" not in item["path"].lower()
+       ):
             files.append(item["path"])
+            
 
     # --- File contents ---
     contents = []
