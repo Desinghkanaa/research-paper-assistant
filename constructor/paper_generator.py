@@ -20,11 +20,17 @@ Return only the title.
         temperature=0.2,
     ).strip()
 
-    def section(name, query, words, k=4):
+    def section(name, query, words, k=8):
         docs = vector_db.similarity_search(query, k=k)
         context = "\n\n".join(d.page_content for d in docs)
         prompt = f"""
 Write an IEEE-style {name} section (~{words} words).
+
+STRICT RULES:
+- Use ONLY the provided context
+- Do NOT add assumptions
+- If information is missing, mention limitations
+- Be technically accurate
 
 Context:
 {context}
@@ -51,7 +57,9 @@ Context:
 
     sections["methodology"] = section(
         "Methodology",
-        "architecture, algorithms, data flow",
+        "system architecture and components",
+        "core algorithms and logic implementation",
+        "data flow and processing pipeline",
         700,
     )
 
