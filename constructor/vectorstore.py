@@ -3,6 +3,7 @@ from langchain_core.documents import Document
 
 from shared.embeddings import get_embeddings
 from shared.text_splitter import default_splitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
 def build_vectorstore(repo_data: dict):
@@ -15,7 +16,12 @@ def build_vectorstore(repo_data: dict):
             )
         )
 
-    splitter = default_splitter()
+    # splitter = default_splitter()
+    splitter = RecursiveCharacterTextSplitter(
+    chunk_size=500,      # smaller for code
+    chunk_overlap=100,
+    )
+    
     chunks = splitter.split_documents(docs)
 
     embeddings = get_embeddings()
